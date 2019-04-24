@@ -1,0 +1,29 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "jobs",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "jobs",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "jobs",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "system":{
+    "jwt_expire": "24h",
+    "port":1332,
+    "jwt_secretkey":"globalequityesearchandrevere",
+    "salt":8
+  }
+}
