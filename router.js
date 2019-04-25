@@ -21,6 +21,8 @@ module.exports = function(app) {
 
   apiRoutes.post("/post-job", JobsController.postJob);
   apiRoutes.get("/jobs", JobsController.getJobs);
+  apiRoutes.get("/job/:id", JobsController.getJobById);
+
 
 
   app.use("/v1", apiRoutes);

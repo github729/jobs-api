@@ -41,10 +41,19 @@ module.exports = {
       function: {
         type: Sequelize.STRING
       },
+      jobDeadLine: {
+        type: Sequelize.DATE
+      },
       industry: {
         type: Sequelize.STRING
       },
       companyName: {
+        type: Sequelize.STRING
+      },
+      companySize: {
+        type: Sequelize.INTEGER
+      },
+      companySite: {
         type: Sequelize.STRING
       },
       email: {

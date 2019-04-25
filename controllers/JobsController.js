@@ -53,6 +53,23 @@ exports.getJobs = function (req, res) {
       res.json(result);
   });
 }
+exports.getJobById = function (req, res) {
+  models.jobs.findOne({
+      where: { id: req.params.id }
+  }).then(job => {
+      let result = {};
+      if (job) {
+          result.success = true;
+          result.data = job;
+      } else {
+          result.success = false;
+          result.message = 'No job available'
+      }
+      res.json(result);
+  });
+}
+
+
 
 noResults = (result, response) => {
   result.success = "failure";
