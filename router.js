@@ -1,6 +1,8 @@
 var express = require("express");
 var UserController = require("./controllers/UserController");
 var JobsController = require("./controllers/JobsController");
+var ResumeController = require("./controllers/ResumesController");
+
 
 
 module.exports = function(app) {
@@ -22,8 +24,8 @@ module.exports = function(app) {
   apiRoutes.post("/post-job", JobsController.postJob);
   apiRoutes.get("/jobs", JobsController.getJobs);
   apiRoutes.get("/job/:id", JobsController.getJobById);
-
-
+  apiRoutes.post("/post-resume", ResumeController.postResume);
+  apiRoutes.get("/resume/:id", ResumeController.getResume);
 
   app.use("/v1", apiRoutes);
 };
