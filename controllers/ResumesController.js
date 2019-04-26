@@ -2,7 +2,6 @@ var models = require("../models");
 
 exports.postResume = function(req, res) {
   let postData = req.body;
-  postData.userId = 1;
   let result = {};
   models.resumes
     .create(postData)

@@ -3,8 +3,6 @@ var UserController = require("./controllers/UserController");
 var JobsController = require("./controllers/JobsController");
 var ResumeController = require("./controllers/ResumesController");
 
-
-
 module.exports = function(app) {
   app.get("/", (req, res) => {
     res.send("The Jobs Api watch at 1332");
@@ -21,6 +19,13 @@ module.exports = function(app) {
   //Middleware function to authentication
   // apiRoutes.use(UserController.authenticate);
 
+
+  apiRoutes.delete("/close-account/:id", UserController.deleteAccount);
+  apiRoutes.put("/update-user", UserController.updateUser);
+  apiRoutes.get("/user/:id", UserController.getUserById);
+
+
+  
   apiRoutes.post("/post-job", JobsController.postJob);
   apiRoutes.get("/jobs", JobsController.getJobs);
   apiRoutes.get("/job/:id", JobsController.getJobById);
