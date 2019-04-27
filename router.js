@@ -23,12 +23,20 @@ module.exports = function(app) {
   apiRoutes.delete("/close-account/:id", UserController.deleteAccount);
   apiRoutes.put("/update-user", UserController.updateUser);
   apiRoutes.get("/user/:id", UserController.getUserById);
+  apiRoutes.put("/change-password", UserController.ChangePwd);
 
 
   
   apiRoutes.post("/post-job", JobsController.postJob);
-  apiRoutes.get("/jobs", JobsController.getJobs);
+  apiRoutes.post("/jobs", JobsController.getJobs);
   apiRoutes.get("/job/:id", JobsController.getJobById);
+  apiRoutes.get("/job-filters", JobsController.filterJobs);
+  // apiRoutes.get("/job-categories", JobsController.getJobCategories);
+  // apiRoutes.get("/job-companies", JobsController.getJobCompanies);
+
+
+
+  
   apiRoutes.post("/post-resume", ResumeController.postResume);
   apiRoutes.get("/resume/:id", ResumeController.getResume);
 

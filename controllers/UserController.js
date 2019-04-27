@@ -104,7 +104,7 @@ exports.Register = function(request, response) {
 exports.getUserById = function(req, res) {
   models.users
     .findOne({
-      attributes:['name','city','role','mobileNumber','email'],
+      attributes: ["name", "city", "role", "mobileNumber", "email"],
       where: { id: req.params.id }
     })
     .then(user => {
@@ -192,13 +192,15 @@ exports.deleteAccount = function(req, res) {
 exports.ChangePwd = (req, res) => {
   models.users
     .findOne({
-      where: { id: req.app.locals.decodedData.id }
+      where: {
+        id: req.body.userId
+      }
     })
     .then(user => {
       if (user) {
-        if (req.body.password === req.body.confirm_password) {
+        if (req.body.newPassword === req.body.confirm_password) {
           let updateData = {};
-          updateData.password = models.users.generateHash(req.body.password);
+          updateData.newPassword = models.users.generateHash(req.body.newPassword);
           user.updateAttributes(updateData).then(updatedUser => {
             if (updatedUser) {
               return res.json({
@@ -221,6 +223,13 @@ exports.ChangePwd = (req, res) => {
           message: "Password Not changed."
         });
       }
+    })
+    .catch(function(err) {
+      // every other error
+      return res.status(400).json({
+        success: false,
+        message: err
+      });
     });
 };
 
