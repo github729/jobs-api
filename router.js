@@ -2,6 +2,8 @@ var express = require("express");
 var UserController = require("./controllers/UserController");
 var JobsController = require("./controllers/JobsController");
 var ResumeController = require("./controllers/ResumesController");
+var DataController = require("./controllers/DataController");
+
 
 module.exports = function(app) {
   app.get("/", (req, res) => {
@@ -39,6 +41,10 @@ module.exports = function(app) {
   
   apiRoutes.post("/post-resume", ResumeController.postResume);
   apiRoutes.get("/resume/:id", ResumeController.getResume);
+  apiRoutes.get("/cities/:stateId", DataController.getCities);
+  apiRoutes.get("/states", DataController.getStates);
+
+
 
   app.use("/v1", apiRoutes);
 };

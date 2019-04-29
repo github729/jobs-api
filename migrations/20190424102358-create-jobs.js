@@ -26,10 +26,10 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      country: {
+      state: {
         type: Sequelize.STRING
       },
-      state: {
+      city: {
         type: Sequelize.STRING
       },
       minSalary: {

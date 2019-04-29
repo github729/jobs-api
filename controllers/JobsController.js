@@ -134,8 +134,7 @@ filter = (req, res, cb) => {
       callback => {
         models.jobs
           .findAll({
-            attributes: ["country", "state"],
-            group: ["country", "state"]
+            attributes: [ "state","city"],
           })
           .then(locations => {
             callback(null, locations);
@@ -183,53 +182,93 @@ exports.getJobs = (req, res) => {
 //filtering active Jobs
 jobsFiltration = (req, res, cb) => {
   postData = req.body;
-
   let where = {};
+  let likeCond = [];
   if (Object.keys(postData).length > 2) {
-    where = {
-      $or: [
-        {
-          category: {
-            $like: postData.category
-          }
-        },
-        {
-          state: {
-            $like: postData.state
-          }
-        },
-        {
-          address: {
-            $like: postData.keywords
-          }
-        },
-        {
-          jobType: {
-            $like: postData.jobType
-          }
-        },
-        {
-          experience: {
-            $like: postData.experience
-          }
-        },
-        {
-          companyName: {
-            $like: postData.companyName
-          }
-        },
-        {
-          country: {
-            $like: postData.location
-          }
-        },
-        {
-          state: {
-            $like: postData.location
-          }
+    if (postData.category) {
+      let item = {
+        category: {
+          $like: postData.category
         }
-      ]
-    };
+      };
+      likeCond.push(item);
+    }
+    if (postData.city) {
+      let item = {
+        city: {
+          $like: postData.city
+        }
+      };
+      likeCond.push(item);
+    }
+    if (postData.jobType) {
+      let item = {
+        jobType: {
+          $like: postData.jobType
+        }
+      };
+      likeCond.push(item);
+    }
+    if (postData.experience) {
+      let item = {
+        experience: {
+          $like: postData.experience
+        }
+      };
+      likeCond.push(item);
+    }
+    if (postData.companyName) {
+      let item = {
+        companyName: {
+          $like: postData.companyName
+        }
+      };
+      likeCond.push(item);
+    }
+    if (postData.location) {
+      let item = {
+        state: {
+          $like: postData.location
+        }
+      };
+      likeCond.push(item);
+    }
+    if (postData.selectedJobType && postData.selectedJobType.length > 0) {
+      let item = {
+        jobType: {
+          $in: postData.selectedJobType
+        }
+      };
+      likeCond.push(item);
+    }
+    if (postData.selectedExp && postData.selectedExp.length > 0) {
+      console.log(postData);
+      let item = {
+        experience: {
+          $in: postData.selectedExp
+        }
+      };
+      likeCond.push(item);
+    }
+    if (postData.selectedLocations && postData.selectedLocations.length > 0) {
+      let item = {
+        state: {
+          $in: postData.selectedLocations
+        }
+      };
+      likeCond.push(item);
+    }
+    if (postData.selectedCompanies && postData.selectedCompanies.length > 0) {
+      let item = {
+        companyName: {
+          $in: postData.selectedCompanies
+        }
+      };
+      likeCond.push(item);
+    }
+    if (likeCond.length > 0) {
+      Object.assign(where, { $or: likeCond });
+    }
   }
   async.parallel(
     [
