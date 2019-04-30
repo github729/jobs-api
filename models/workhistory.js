@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const workHistory = sequelize.define('workHistory', {
+  const workhistories = sequelize.define('workhistories', {
     resumeId: DataTypes.INTEGER,
     companyName: DataTypes.STRING,
     designation: DataTypes.STRING,
@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     relievingDate: DataTypes.STRING,
     jobDescription: DataTypes.STRING
   }, {});
-  workHistory.associate = function(models) {
+  workhistories.associate = function(models) {
     // associations can be defined here
   };
-  return workHistory;
+  return workhistories;
 };
