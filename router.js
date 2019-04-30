@@ -17,9 +17,11 @@ module.exports = function(app) {
   //user urls
   apiRoutes.post("/sign-up", UserController.Register);
   apiRoutes.post("/sign-in", UserController.Login);
+  apiRoutes.post("/jobs", JobsController.getJobs);
+  apiRoutes.get("/job-filters", JobsController.filterJobs);
 
   //Middleware function to authentication
-  // apiRoutes.use(UserController.authenticate);
+  apiRoutes.use(UserController.authenticate);
 
 
   apiRoutes.delete("/close-account/:id", UserController.deleteAccount);
@@ -30,9 +32,7 @@ module.exports = function(app) {
 
   
   apiRoutes.post("/post-job", JobsController.postJob);
-  apiRoutes.post("/jobs", JobsController.getJobs);
   apiRoutes.get("/job/:id", JobsController.getJobById);
-  apiRoutes.get("/job-filters", JobsController.filterJobs);
   // apiRoutes.get("/job-categories", JobsController.getJobCategories);
   // apiRoutes.get("/job-companies", JobsController.getJobCompanies);
 

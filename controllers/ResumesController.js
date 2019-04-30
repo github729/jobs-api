@@ -17,7 +17,7 @@ exports.postResume = function(req, res) {
       });
       if (resume) {
         if (postData.workHistory != undefined) {
-          models.workHistory
+          models.workhistories
             .bulkCreate(postData.workHistory)
             .then(function(work) {
               if (work) {
@@ -70,7 +70,7 @@ exports.postResume = function(req, res) {
 exports.getResume = function(req, res) {
   models.resumes.belongsTo(models.users, { foreignKey: "userId" });
   models.resumes.hasMany(models.languages, { foreignKey: "resumeId" });
-  models.resumes.hasMany(models.workHistory, { foreignKey: "resumeId" });
+  models.resumes.hasMany(models.workhistories, { foreignKey: "resumeId" });
   models.resumes.hasMany(models.education, { foreignKey: "resumeId" });
   models.resumes
     .findOne({
@@ -80,7 +80,7 @@ exports.getResume = function(req, res) {
           model: models.languages
         },
         {
-          model: models.workHistory
+          model: models.workhistories
         },
         {
           model: models.education
