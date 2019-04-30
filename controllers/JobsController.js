@@ -184,6 +184,7 @@ jobsFiltration = (req, res, cb) => {
   postData = req.body;
   let where = {};
   let likeCond = [];
+  let orCondition = [];
   if (Object.keys(postData).length > 2) {
     if (postData.category) {
       let item = {
@@ -192,6 +193,22 @@ jobsFiltration = (req, res, cb) => {
         }
       };
       likeCond.push(item);
+    }
+    if (postData.keywords) {
+      let item = {
+        requirements: {
+          $like: postData.keywords
+        }
+      };
+      orCondition.push(item);
+    }
+    if (postData.keywords) {
+      let item = {
+        function: {
+          $like: postData.keywords
+        }
+      };
+      orCondition.push(item);
     }
     if (postData.city) {
       let item = {
@@ -267,7 +284,7 @@ jobsFiltration = (req, res, cb) => {
       likeCond.push(item);
     }
     if (likeCond.length > 0) {
-      Object.assign(where, { $or: likeCond });
+      Object.assign(where,{ $and: likeCond});
     }
   }
   async.parallel(
