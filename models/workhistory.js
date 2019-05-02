@@ -1,3 +1,4 @@
+
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const workhistories = sequelize.define('workhistories', {
@@ -12,4 +13,6 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   };
   return workhistories;
+
 };
+
