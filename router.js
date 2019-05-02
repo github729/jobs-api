@@ -19,6 +19,8 @@ module.exports = function(app) {
   apiRoutes.post("/sign-in", UserController.Login);
   apiRoutes.post("/jobs", JobsController.getJobs);
   apiRoutes.get("/job-filters", JobsController.filterJobs);
+  apiRoutes.get("/top-five-jobs", JobsController.topFiveJobs);
+
 
   //Middleware function to authentication
   apiRoutes.use(UserController.authenticate);

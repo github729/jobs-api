@@ -108,6 +108,34 @@ exports.getJobCompanies = function(req, res) {
       res.json(result);
     });
 };
+exports.topFiveJobs = function(req, res) {
+  models.jobs
+    .findAll({
+      attributes: [
+        "id",
+        "category",
+        "companyName",
+        "minSalary",
+        "maxSalary",
+        "jobType",
+        "city",
+        "state"
+      ],
+      order: [["createdAt", "DESC"]],
+      limit: 5
+    })
+    .then(jobs => {
+      let result = {};
+      if (jobs) {
+        result.success = true;
+        result.data = jobs;
+      } else {
+        result.success = false;
+        result.message = "No jobs Found";
+      }
+      res.json(result);
+    });
+};
 noResults = (result, response) => {
   result.success = "failure";
   result.message = "Something went wrong";
@@ -134,7 +162,7 @@ filter = (req, res, cb) => {
       callback => {
         models.jobs
           .findAll({
-            attributes: [ "state","city"],
+            attributes: ["state", "city"]
           })
           .then(locations => {
             callback(null, locations);
@@ -284,7 +312,7 @@ jobsFiltration = (req, res, cb) => {
       likeCond.push(item);
     }
     if (likeCond.length > 0) {
-      Object.assign(where,{ $and: likeCond});
+      Object.assign(where, { $and: likeCond });
     }
   }
   async.parallel(
@@ -305,6 +333,17 @@ jobsFiltration = (req, res, cb) => {
       callback => {
         models.jobs
           .findAll({
+            attributes: [
+              "id",
+              "category",
+              "companyName",
+              "minSalary",
+              "maxSalary",
+              "jobType",
+              "city",
+              "state"
+            ],
+
             where: where,
             limit: postData.limit,
             offset: postData.offset
