@@ -20,7 +20,7 @@ module.exports = function(app) {
   apiRoutes.post("/jobs", JobsController.getJobs);
   apiRoutes.get("/job-filters", JobsController.filterJobs);
   apiRoutes.get("/top-five-jobs", JobsController.topFiveJobs);
-
+  apiRoutes.get("/job/:id", JobsController.getJobById);
 
   //Middleware function to authentication
   apiRoutes.use(UserController.authenticate);
@@ -34,7 +34,7 @@ module.exports = function(app) {
 
   
   apiRoutes.post("/post-job", JobsController.postJob);
-  apiRoutes.get("/job/:id", JobsController.getJobById);
+ 
   // apiRoutes.get("/job-categories", JobsController.getJobCategories);
   // apiRoutes.get("/job-companies", JobsController.getJobCompanies);
 
