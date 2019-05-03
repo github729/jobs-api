@@ -23,7 +23,7 @@ module.exports = function(app) {
   apiRoutes.get("/job/:id", JobsController.getJobById);
 
   //Middleware function to authentication
-  apiRoutes.use(UserController.authenticate);
+  // apiRoutes.use(UserController.authenticate);
 
 
   apiRoutes.delete("/close-account/:id", UserController.deleteAccount);
