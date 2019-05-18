@@ -119,6 +119,7 @@ exports.topFiveJobs = function(req, res) {
         "maxSalary",
         "jobType",
         "city",
+        "title",
         "state"
       ],
       order: [["createdAt", "DESC"]],
@@ -342,12 +343,13 @@ jobsFiltration = (req, res, cb) => {
               "maxSalary",
               "jobType",
               "city",
+              "title",
               "state"
             ],
-
             where: where,
             limit: postData.limit,
-            offset: postData.offset
+            offset: postData.offset,
+            order: [["createdAt", "DESC"]],
           })
           .then(jobs => {
             callback(null, jobs);
