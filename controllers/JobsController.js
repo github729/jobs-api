@@ -163,7 +163,7 @@ filter = (req, res, cb) => {
         models.jobs
           .findAll({
             attributes: ["state", "city"],
-            group:["state","city"]
+            group:["city"]
           })
           .then(locations => {
             callback(null, locations);

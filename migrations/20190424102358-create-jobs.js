@@ -48,7 +48,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       jobDeadLine: {
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       industry: {
         type: Sequelize.STRING

@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       salaryType: DataTypes.STRING,
       experience: DataTypes.STRING,
       function: DataTypes.STRING,
-      jobDeadLine: DataTypes.DATE,
+      jobDeadLine: DataTypes.STRING,
       industry: DataTypes.STRING,
       companyName: DataTypes.STRING,
       companySize: DataTypes.INTEGER,
