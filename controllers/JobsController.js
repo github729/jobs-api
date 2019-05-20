@@ -274,7 +274,7 @@ jobsFiltration = (req, res, cb) => {
     }
     if (postData.location) {
       let item = {
-        state: {
+        city: {
           $like: postData.location
         }
       };
@@ -289,7 +289,6 @@ jobsFiltration = (req, res, cb) => {
       likeCond.push(item);
     }
     if (postData.selectedExp && postData.selectedExp.length > 0) {
-      console.log(postData);
       let item = {
         experience: {
           $in: postData.selectedExp
@@ -299,7 +298,7 @@ jobsFiltration = (req, res, cb) => {
     }
     if (postData.selectedLocations && postData.selectedLocations.length > 0) {
       let item = {
-        state: {
+        city: {
           $in: postData.selectedLocations
         }
       };
