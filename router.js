@@ -9,12 +9,11 @@ module.exports = function(app) {
   app.get("/", (req, res) => {
     res.send("The Jobs Api watch at 1332");
   });
-
   app.get('/fb', (req, res) => {
     var FB = require('fb');
     FB.setAccessToken('EAACEdEose0cBAJjLjbUmgEgD0BzDxHJltFyLseyBX1mPoRURXNZCvhcbfD88H65l2hLxwbKhEAiyNwUN8Nq3p813opeboTaMFHwY0Ww3Nv0jSstXB5em6xDQwU0gZBaNf9qNcnDBe1QTAqpAntQZCcZB7ZBljeifZB87tK6MmLnS5sNvaDwdeq5nHZASobw1TNSBbuGf1NmpQZDZD');
     var body = 'My first post using facebook-node-sdk';
-    FB.api('me/feed', 'post', { message: body, link: 'http://ec2-35-178-115-252.eu-west-2.compute.amazonaws.com/insights/preview/23' }, function (res) {
+    FB.api('me/feed', 'post', { message: body, link: 'http://mp3tones.in/' }, function (res) {
         if (!res || res.error) {
             console.log(!res ? 'error occurred' : res.error);
             return;
@@ -22,9 +21,7 @@ module.exports = function(app) {
     });
     res.json({ 'hi': res.id });
 });
-
 accessToken = null;
-
   var apiRoutes = express.Router();
 
   apiRoutes.get("/", (req, res) => {
