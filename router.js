@@ -27,6 +27,7 @@ module.exports = function (app) {
   apiRoutes.get("/", (req, res) => {
     res.send("Welcome to Jobs Api");
   });
+
   //user urls
   apiRoutes.post("/sign-up", UserController.Register);
   apiRoutes.post("/sign-in", UserController.Login);
