@@ -49,8 +49,8 @@ module.exports = function (app) {
 
   apiRoutes.post("/post-job", JobsController.postJob);
 
-  // apiRoutes.get("/job-categories", JobsController.getJobCategories);
-  // apiRoutes.get("/job-companies", JobsController.getJobCompanies);
+  apiRoutes.get("/job-categories", JobsController.getJobCategories);
+  apiRoutes.get("/job-companies", JobsController.getJobCompanies);
 
 
 
@@ -59,6 +59,7 @@ module.exports = function (app) {
   apiRoutes.get("/resume/:id", ResumeController.getResume);
   apiRoutes.get("/cities/:stateId", DataController.getCities);
   apiRoutes.get("/states", DataController.getStates);
+  apiRoutes.get("/all-locations", DataController.getAllLocations);
 
   apiRoutes.post('/uploads', GovtJobsController.Upload);
   apiRoutes.get('/govt-jobs', GovtJobsController.getGovtJobs);
