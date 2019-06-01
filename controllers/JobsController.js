@@ -1,7 +1,7 @@
 var models = require("../models");
 var async = require("async");
 //create users
-exports.postJob = function(request, response) {
+exports.postJob = function (request, response) {
   let postData = request.body;
   models.jobs.create(postData).then(job => {
     let result = {};
@@ -34,7 +34,7 @@ exports.postJob = function(request, response) {
 //     res.json(result);
 //   });
 // };
-exports.getJobById = function(req, res) {
+exports.getJobById = function (req, res) {
   models.jobs
     .findOne({
       where: { id: req.params.id }
@@ -51,7 +51,7 @@ exports.getJobById = function(req, res) {
       res.json(result);
     });
 };
-exports.getJobLocations = function(req, res) {
+exports.getJobLocations = function (req, res) {
   let postData = req.body;
   models.jobs
     .findAll({
@@ -70,7 +70,7 @@ exports.getJobLocations = function(req, res) {
       res.json(result);
     });
 };
-exports.getJobCategories = function(req, res) {
+exports.getJobCategories = function (req, res) {
   let postData = req.body;
   models.jobs
     .findAll({
@@ -89,7 +89,7 @@ exports.getJobCategories = function(req, res) {
       res.json(result);
     });
 };
-exports.getJobCompanies = function(req, res) {
+exports.getJobCompanies = function (req, res) {
   let postData = req.body;
   models.jobs
     .findAll({
@@ -108,7 +108,7 @@ exports.getJobCompanies = function(req, res) {
       res.json(result);
     });
 };
-exports.topFiveJobs = function(req, res) {
+exports.topFiveJobs = function (req, res) {
   models.jobs
     .findAll({
       attributes: [
@@ -152,11 +152,14 @@ filter = (req, res, cb) => {
     [
       callback => {
         models.jobs
-          .findAll({ attributes: ["category"], group: ["category"] })
+          .findAll({
+            attributes: ["category"], group: ["category"], order: [["createdAt", "DESC"]],
+            limit: 5
+          })
           .then(categories => {
             callback(null, categories);
           })
-          .catch(function(err) {
+          .catch(function (err) {
             callback(err);
           });
       },
@@ -164,12 +167,14 @@ filter = (req, res, cb) => {
         models.jobs
           .findAll({
             attributes: ["state", "city"],
-            group:["city","state"]
+            group: ["city", "state"],
+            order: [["createdAt", "DESC"]],
+            limit: 5
           })
           .then(locations => {
             callback(null, locations);
           })
-          .catch(function(err) {
+          .catch(function (err) {
             callback(err);
           });
       },
@@ -177,12 +182,14 @@ filter = (req, res, cb) => {
         models.jobs
           .findAll({
             attributes: ["companyName"],
-            group: ["companyName"]
+            group: ["companyName"],
+            order: [["createdAt", "DESC"]],
+            limit: 5
           })
           .then(companies => {
             callback(null, companies);
           })
-          .catch(function(err) {
+          .catch(function (err) {
             callback(err);
           });
       }
@@ -327,7 +334,7 @@ jobsFiltration = (req, res, cb) => {
           .then(jobs => {
             callback(null, jobs.length);
           })
-          .catch(function(err) {
+          .catch(function (err) {
             callback(err);
           });
       },
@@ -353,7 +360,7 @@ jobsFiltration = (req, res, cb) => {
           .then(jobs => {
             callback(null, jobs);
           })
-          .catch(function(err) {
+          .catch(function (err) {
             callback(err);
           });
       }
