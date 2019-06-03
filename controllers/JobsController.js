@@ -142,12 +142,12 @@ noResults = (result, response) => {
   result.message = "Something went wrong";
   response.json(result);
 };
-exports.filterJobs = (req, res) => {
-  filter(req, res, records => {
+exports.topFivefilterJobs = (req, res) => {
+  topFivefilter(req, res, records => {
     return res.json(records);
   });
 };
-filter = (req, res, cb) => {
+topFivefilter = (req, res, cb) => {
   async.parallel(
     [
       callback => {
@@ -185,6 +185,76 @@ filter = (req, res, cb) => {
             group: ["companyName"],
             order: [["createdAt", "DESC"]],
             limit: 5
+          })
+          .then(companies => {
+            callback(null, companies);
+          })
+          .catch(function (err) {
+            callback(err);
+          });
+      }
+    ],
+    (err, results) => {
+      let json_res = {};
+      if (err) {
+        json_res["success"] = false;
+        json_res["message"] = err;
+        json_res["data"] = [];
+      } else {
+        json_res["success"] = true;
+        json_res["categories"] = results[0];
+        json_res["locations"] = results[1];
+        json_res["companies"] = results[2];
+      }
+      cb(json_res);
+    }
+  );
+};
+exports.getJobs = (req, res) => {
+  jobsFiltration(req, res, records => {
+    return res.json(records);
+  });
+};
+exports.filterJobs = (req, res) => {
+  filterJobs(req, res, records => {
+    return res.json(records);
+  });
+};
+filterJobs = (req, res, cb) => {
+  async.parallel(
+    [
+      callback => {
+        models.jobs
+          .findAll({
+            attributes: ["category"], group: ["category"], order: [["createdAt", "DESC"]],
+          })
+          .then(categories => {
+            callback(null, categories);
+          })
+          .catch(function (err) {
+            callback(err);
+          });
+      },
+      callback => {
+        models.jobs
+          .findAll({
+            attributes: ["state", "city"],
+            group: ["city", "state"],
+            order: [["createdAt", "DESC"]],
+          })
+          .then(locations => {
+            callback(null, locations);
+          })
+          .catch(function (err) {
+            callback(err);
+          });
+      },
+      callback => {
+        models.jobs
+          .findAll({
+            attributes: ["companyName"],
+            group: ["companyName"],
+            order: [["createdAt", "DESC"]],
           })
           .then(companies => {
             callback(null, companies);

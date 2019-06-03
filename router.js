@@ -32,6 +32,7 @@ module.exports = function (app) {
   apiRoutes.post("/sign-up", UserController.Register);
   apiRoutes.post("/sign-in", UserController.Login);
   apiRoutes.post("/jobs", JobsController.getJobs);
+  apiRoutes.get("/job-top-five-filters", JobsController.topFivefilterJobs);
   apiRoutes.get("/job-filters", JobsController.filterJobs);
   apiRoutes.get("/top-five-jobs", JobsController.topFiveJobs);
   apiRoutes.get("/job/:id", JobsController.getJobById);
@@ -62,8 +63,10 @@ module.exports = function (app) {
   apiRoutes.get("/all-locations", DataController.getAllLocations);
 
   apiRoutes.post('/uploads', GovtJobsController.Upload);
-  apiRoutes.get('/govt-jobs', GovtJobsController.getGovtJobs);
+  apiRoutes.get('/govt-jobs-by-states', GovtJobsController.getGovtJobsByStates);
   apiRoutes.post('/create-govt-jobs', GovtJobsController.postGovtJob);
   apiRoutes.delete('/govt-jobs/remove-file', GovtJobsController.RemoveFile);
+  apiRoutes.get('/govt-jobs-by-industries', GovtJobsController.getGovtJobsByIndustries);
+
   app.use("/v1", apiRoutes);
 };

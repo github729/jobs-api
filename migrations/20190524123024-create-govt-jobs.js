@@ -20,11 +20,11 @@ module.exports = {
       deadline: {
         type: Sequelize.STRING
       },
-      state: {
-        type: Sequelize.STRING
+      stateId: {
+        type: Sequelize.INTEGER
       },
-      industry: {
-        type: Sequelize.STRING
+      industryId: {
+        type: Sequelize.INTEGER
       },
       notificationFile: {
         type: Sequelize.STRING
