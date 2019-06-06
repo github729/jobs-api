@@ -19,7 +19,7 @@ exports.getCities = function (req, res) {
 };
 
 exports.getStates = function (req, res) {
-  models.states.findAll({}).then(data => {
+  models.states.findAll().then(data => {
     let result = {};
     if (data) {
       result.data = data;
@@ -27,6 +27,19 @@ exports.getStates = function (req, res) {
     } else {
       result.success = false;
       result.message = "No States Found";
+    }
+    res.json(result);
+  });
+};
+exports.getIndustries = function (req, res) {
+  models.industries.findAll().then(data => {
+    let result = {};
+    if (data) {
+      result.data = data;
+      result.success = true;
+    } else {
+      result.success = false;
+      result.message = "No Industries Found";
     }
     res.json(result);
   });
